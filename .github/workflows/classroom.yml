@@ -11,7 +11,7 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Check Files
-        id: check-files
+        id: check_files
         uses: education/autograding-command-grader@v1
         continue-on-error: true
         with:
@@ -22,7 +22,7 @@ jobs:
           max-score: 25
 
       - name: Check HTML
-        id: check-html
+        id: check_html
         uses: education/autograding-command-grader@v1
         continue-on-error: true
         with:
@@ -32,7 +32,7 @@ jobs:
           max-score: 25
 
       - name: Check CSS
-        id: check-css
+        id: check_css
         uses: education/autograding-command-grader@v1
         continue-on-error: true
         with:
@@ -42,7 +42,7 @@ jobs:
           max-score: 25
 
       - name: Check Layout
-        id: check-layout
+        id: check_layout
         uses: education/autograding-command-grader@v1
         continue-on-error: true
         with:
@@ -55,9 +55,9 @@ jobs:
         uses: education/autograding-grading-reporter@v1
         if: always()
         env:
-          CHECK-FILES_SCORE: ${{ steps.check-files.outputs.score }}
-          CHECK-HTML_SCORE: ${{ steps.check-html.outputs.score }}
-          CHECK-CSS_SCORE: ${{ steps.check-css.outputs.score }}
-          CHECK-LAYOUT_SCORE: ${{ steps.check-layout.outputs.score }}
+          CHECK_FILES_SCORE: ${{ steps.check_files.outputs.score }}
+          CHECK_HTML_SCORE: ${{ steps.check_html.outputs.score }}
+          CHECK_CSS_SCORE: ${{ steps.check_css.outputs.score }}
+          CHECK_LAYOUT_SCORE: ${{ steps.check_layout.outputs.score }}
         with:
-          runners: check-files,check-html,check-css,check-layout
+          runners: check_files,check_html,check_css,check_layout
