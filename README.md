@@ -1,5 +1,3 @@
-Viewed start-01-unit-html5-basics.html:1-618
-
 針對 **`start-01-unit-html5-basics` (Web App 開發環境與 HTML5 基礎)** 單元，這是學員進入「全棧開發」的第一步。它要求學員具備 **現代 Web 工程化 (Modern Web Engineering)** 的思維，學習如何架設即時預覽環境，並掌握 HTML5 的語義化結構與「行動優先 (Mobile First)」的開發流程，為後續的遙控介面打下結構性的基礎。
 
 以下是在 **GitHub Classroom** 部署其作業 (Assignments) 的具體建議：
