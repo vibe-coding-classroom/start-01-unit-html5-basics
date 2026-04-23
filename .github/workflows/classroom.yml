@@ -54,10 +54,5 @@ jobs:
       - name: Autograding Reporter
         uses: classroom-resources/autograding-grading-reporter@v1
         if: always()
-        env:
-          CHECKFILES_SCORE: ${{ steps.checkfiles.outputs.score }}
-          CHECKHTML_SCORE: ${{ steps.checkhtml.outputs.score }}
-          CHECKCSS_SCORE: ${{ steps.checkcss.outputs.score }}
-          CHECKLAYOUT_SCORE: ${{ steps.checklayout.outputs.score }}
         with:
           runners: checkfiles,checkhtml,checkcss,checklayout
