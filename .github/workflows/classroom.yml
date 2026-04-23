@@ -11,8 +11,8 @@ jobs:
       - uses: actions/checkout@v4
       
       - name: Check Files
-        id: checkfiles
-        uses: classroom-resources/autograding-command-grader@v1
+        id: check-files
+        uses: education/autograding-command-grader@v1
         continue-on-error: true
         with:
           test-name: 'Required Files'
@@ -22,8 +22,8 @@ jobs:
           max-score: 25
 
       - name: Check HTML
-        id: checkhtml
-        uses: classroom-resources/autograding-command-grader@v1
+        id: check-html
+        uses: education/autograding-command-grader@v1
         continue-on-error: true
         with:
           test-name: 'HTML Structure'
@@ -32,8 +32,8 @@ jobs:
           max-score: 25
 
       - name: Check CSS
-        id: checkcss
-        uses: classroom-resources/autograding-command-grader@v1
+        id: check-css
+        uses: education/autograding-command-grader@v1
         continue-on-error: true
         with:
           test-name: 'CSS Mobile Optimizations'
@@ -42,8 +42,8 @@ jobs:
           max-score: 25
 
       - name: Check Layout
-        id: checklayout
-        uses: classroom-resources/autograding-command-grader@v1
+        id: check-layout
+        uses: education/autograding-command-grader@v1
         continue-on-error: true
         with:
           test-name: 'Layout & FPV Container'
@@ -52,7 +52,12 @@ jobs:
           max-score: 25
 
       - name: Autograding Reporter
-        uses: classroom-resources/autograding-grading-reporter@v1
+        uses: education/autograding-grading-reporter@v1
         if: always()
+        env:
+          CHECK-FILES_SCORE: ${{ steps.check-files.outputs.score }}
+          CHECK-HTML_SCORE: ${{ steps.check-html.outputs.score }}
+          CHECK-CSS_SCORE: ${{ steps.check-css.outputs.score }}
+          CHECK-LAYOUT_SCORE: ${{ steps.check-layout.outputs.score }}
         with:
-          runners: checkfiles,checkhtml,checkcss,checklayout
+          runners: check-files,check-html,check-css,check-layout
