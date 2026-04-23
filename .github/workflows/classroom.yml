@@ -6,23 +6,53 @@ permissions:
   contents: read
 jobs:
   autograding:
-    outputs:
-      grader_score: ${{ steps.grader.outputs.score }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Full Assignment Check
-        id: grader
+      
+      - name: Check Files
+        id: check-files
         uses: classroom-resources/autograding-command-grader@v1
         with:
-          test-name: 'HTML5 Basics Validation'
+          test-name: 'Required Files'
           setup-command: 'chmod +x .github/scripts/check_assignment.sh'
-          command: './.github/scripts/check_assignment.sh'
-          timeout: 2
-          max-score: 100
+          command: './.github/scripts/check_assignment.sh files'
+          timeout: 1
+          max-score: 25
+
+      - name: Check HTML
+        id: check-html
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: 'HTML Structure'
+          command: './.github/scripts/check_assignment.sh html'
+          timeout: 1
+          max-score: 25
+
+      - name: Check CSS
+        id: check-css
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: 'CSS Mobile Optimizations'
+          command: './.github/scripts/check_assignment.sh css'
+          timeout: 1
+          max-score: 25
+
+      - name: Check Layout
+        id: check-layout
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: 'Layout & FPV Container'
+          command: './.github/scripts/check_assignment.sh layout'
+          timeout: 1
+          max-score: 25
+
       - name: Autograding Reporter
         uses: classroom-resources/autograding-grading-reporter@v1
         env:
-          GRADER_SCORE: ${{ steps.grader.outputs.score }}
+          CHECK-FILES_SCORE: ${{ steps.check-files.outputs.score }}
+          CHECK-HTML_SCORE: ${{ steps.check-html.outputs.score }}
+          CHECK-CSS_SCORE: ${{ steps.check-css.outputs.score }}
+          CHECK-LAYOUT_SCORE: ${{ steps.check-layout.outputs.score }}
         with:
-          runners: grader
+          runners: check-files,check-html,check-css,check-layout
