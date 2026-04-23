@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Full Assignment Check
-        id: full-assignment-check
+        id: grader
         uses: classroom-resources/autograding-command-grader@v1
         with:
           test-name: 'HTML5 Basics Validation'
@@ -23,6 +23,6 @@ jobs:
       - name: Autograding Reporter
         uses: classroom-resources/autograding-grading-reporter@v1
         env:
-          FULL-ASSIGNMENT-CHECK_SCORE: ${{ steps.full-assignment-check.outputs.score }}
+          GRADER_SCORE: ${{ steps.grader.outputs.score }}
         with:
-          runners: full-assignment-check
+          runners: grader
