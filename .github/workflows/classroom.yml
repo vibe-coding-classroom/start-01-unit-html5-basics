@@ -13,6 +13,7 @@ jobs:
       - name: Check Files
         id: checkfiles
         uses: classroom-resources/autograding-command-grader@v1
+        continue-on-error: true
         with:
           test-name: 'Required Files'
           setup-command: 'chmod +x .github/scripts/check_assignment.sh'
@@ -23,6 +24,7 @@ jobs:
       - name: Check HTML
         id: checkhtml
         uses: classroom-resources/autograding-command-grader@v1
+        continue-on-error: true
         with:
           test-name: 'HTML Structure'
           command: './.github/scripts/check_assignment.sh html'
@@ -32,6 +34,7 @@ jobs:
       - name: Check CSS
         id: checkcss
         uses: classroom-resources/autograding-command-grader@v1
+        continue-on-error: true
         with:
           test-name: 'CSS Mobile Optimizations'
           command: './.github/scripts/check_assignment.sh css'
@@ -41,6 +44,7 @@ jobs:
       - name: Check Layout
         id: checklayout
         uses: classroom-resources/autograding-command-grader@v1
+        continue-on-error: true
         with:
           test-name: 'Layout & FPV Container'
           command: './.github/scripts/check_assignment.sh layout'
@@ -49,6 +53,7 @@ jobs:
 
       - name: Autograding Reporter
         uses: classroom-resources/autograding-grading-reporter@v1
+        if: always()
         env:
           CHECKFILES_SCORE: ${{ steps.checkfiles.outputs.score }}
           CHECKHTML_SCORE: ${{ steps.checkhtml.outputs.score }}
