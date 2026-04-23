@@ -1,0 +1,28 @@
+name: GitHub Classroom Autograding
+on: [push]
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  autograding:
+    outputs:
+      full-assignment-check_score: ${{ steps.full-assignment-check.outputs.score }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Full Assignment Check
+        id: full-assignment-check
+        uses: education/autograding-shell-tester@v1
+        with:
+          test-name: 'HTML5 Basics Validation'
+          setup-command: 'chmod +x .github/scripts/check_assignment.sh'
+          command: './.github/scripts/check_assignment.sh'
+          timeout: 2
+          max-score: 100
+      - name: Autograding Reporter
+        uses: education/autograding-grading-reporter@v1
+        env:
+          FULL-ASSIGNMENT-CHECK_SCORE: ${{ steps.full-assignment-check.outputs.score }}
+        with:
+          runners: full-assignment-check

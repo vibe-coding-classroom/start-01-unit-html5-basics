@@ -1,0 +1,157 @@
+:root {
+    --bg-color: #0f172a;
+    --card-bg: #1e293b;
+    --accent-color: #38bdf8;
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --btn-bg: #334155;
+    --btn-hover: #475569;
+    --status-online: #10b981;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* 任務 2：防止文字誤選 */
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    overflow: hidden; /* 防止行動端滾動 */
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+}
+
+#app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+/* 任務 3：FPV 影像容器佈局 */
+#fpv-section {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #000;
+    position: relative;
+    overflow: hidden;
+}
+
+.stream-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+#stream-image {
+    width: 100%;
+    height: 100%;
+    /* 任務 3：比例裁切練習 */
+    object-fit: cover; 
+    display: block;
+}
+
+.overlay {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 10;
+}
+
+#status-indicator {
+    background: rgba(16, 185, 129, 0.2);
+    color: var(--status-online);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border: 1px solid var(--status-online);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.6; }
+    100% { opacity: 1; }
+}
+
+/* 任務 2：觸控友善性優化 */
+#controls-section {
+    padding: 30px;
+    background: var(--card-bg);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.control-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 15px;
+    justify-items: center;
+}
+
+.middle-row {
+    display: flex;
+    gap: 15px;
+}
+
+.control-btn {
+    /* 任務 2：熱區擴大練習 (不小於 48x48) */
+    width: 64px;
+    height: 64px;
+    border: none;
+    border-radius: 12px;
+    background: var(--btn-bg);
+    color: var(--text-primary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    
+    /* 任務 2：消除點擊延遲 */
+    touch-action: manipulation;
+}
+
+.control-btn:active {
+    transform: scale(0.95);
+    background: var(--accent-color);
+    box-shadow: 0 0 15px var(--accent-color);
+}
+
+#btn-stop {
+    background: #ef4444;
+}
+
+#btn-stop:active {
+    background: #dc2626;
+    box-shadow: 0 0 15px #ef4444;
+}
+
+/* 行動端橫向適應 */
+@media (orientation: landscape) {
+    #app-container {
+        flex-direction: row;
+    }
+    
+    #controls-section {
+        border-top: none;
+        border-left: 1px solid rgba(255, 255, 255, 0.1);
+        width: 300px;
+    }
+}

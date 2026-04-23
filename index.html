@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Vibe Coding - HTML5 Basics & FPV Control</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main id="app-container">
+        <!-- FPV Stream Section -->
+        <section id="fpv-section">
+            <div class="stream-container">
+                <img id="stream-image" src="assets/esp32-stream.jpg" alt="ESP32-CAM Stream">
+                <div class="overlay">
+                    <span id="status-indicator">LIVE</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Control Interface Section -->
+        <section id="controls-section">
+            <div class="control-grid">
+                <button id="btn-up" class="control-btn">▲</button>
+                <div class="middle-row">
+                    <button id="btn-left" class="control-btn">◀</button>
+                    <button id="btn-stop" class="control-btn">■</button>
+                    <button id="btn-right" class="control-btn">▶</button>
+                </div>
+                <button id="btn-down" class="control-btn">▼</button>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
